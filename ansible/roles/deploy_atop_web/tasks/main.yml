@@ -1,0 +1,30 @@
+---
+# tasks file for deploy_atop_web
+
+
+
+    - name: Install Atop WebServers
+      ansible.builtin.apt:
+        name: atop
+        state: present
+
+    - name: Generate index.html file
+      template: src={{ source_folder }}/index.j2 dest={{ destin_folderww }}/index.html mode=0555
+      notify:
+        - restart atop
+
+    - name: Copy MyHomePage
+      copy: src={{ source_folder }}/{{ item }}  dest={{ destin_folder }} mode=0555
+      loop:
+        - "script.sh"
+        - "script1.sh"
+        - "script3.sh"
+
+      notify:
+        - restart atop
+
+    - name: aa
+      service:
+        name: atop
+        state: started
+        enabled: yes

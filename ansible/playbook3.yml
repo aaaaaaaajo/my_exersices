@@ -1,0 +1,9 @@
+---
+- name   : Install Atop and Upload my Web Page
+  hosts  : "{{MYHOSTS}}"
+  become : yes
+ 
+  roles:
+    - { role: deploy_atop_web, when: ansible_system == 'Linux' }
+
+ 

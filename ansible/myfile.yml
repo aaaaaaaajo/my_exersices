@@ -1,0 +1,6 @@
+---
+ansible_ssh_private_key_file:/home/barbara/.ssh/operator1.ssh..
+  ansible_ssh_extra_args:'-o StrictHostKeyChecking=no'
+
+
+...

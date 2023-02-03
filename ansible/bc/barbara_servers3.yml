@@ -1,0 +1,10 @@
+[test33:vars]
+  ansible_port=22
+  ansible_user=operator1 
+
+
+[test33]
+  Tbarbara      ansible_host=192.168.43.207 
+  Tbarbara2      ansible_host=192.168.43.23 
+  Tbarbaramysql      ansible_host=192.168.43.27 
+

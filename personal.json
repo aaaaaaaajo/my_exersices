@@ -1,0 +1,66 @@
+
+{
+"personal" :   [
+{
+"name" :   "Vavara" ,
+"hobby" :   "reading",
+"date_of_birth": "10.06.2003",
+"place_of_living": "Germany",
+"education":  "not finished"
+
+} ,
+ 
+{
+"name" :   "Sasha" ,
+"hobby" :  "malen", 
+"date_of_birth": "02.04.2015",
+"place_of_living": "Germany",
+"education":   "not finished"
+} ,
+ 
+{
+"name" :   "Papa" ,
+"hobby" :   "play games", 
+"date_of_birth":  "23.03.1975",
+"place_of_living": "UKraine",
+"education":  "finished"
+ 
+} ,
+ 
+{
+"name" :   "Mama" ,
+"hobby" :   "Stricken",
+"date_of_birth":  "24.05.1975",
+"place_of_living":  "Germany ",
+"education":  "not finished"
+ 
+},
+ 
+{
+"name" :   "Ivan" ,
+"hobby" :   "Play games",
+"date_of_birth": "26.02.2008",
+"place_of_living":  "Germany ",
+"education":  "not finished "
+ 
+},
+
+{
+"name" :   "Yasha" ,
+"hobby" :   "Sport machen",
+"date_of_birth":  "13.01.2002",
+"place_of_living":  "Ukraine ",
+"education":  "not finished "
+
+},
+
+{
+"name" :   "Babka",
+"hobby" :   "Fernheizen ",
+"date_of_birth":  "10.02.1947", 
+"place_of_living": "Ukraine ", 
+"education":  "finished "
+
+}
+]
+}

@@ -1,0 +1,7 @@
+---
+# handlers file for deploy_atop_web
+
+    - name: restart atop
+      service:
+        name: atop
+        state: restarted

@@ -1,0 +1,24 @@
+---
+- name   : Aboba
+  hosts  : test33
+  become : yes
+  
+  vars:
+    message1: Ivan
+    message2: Kakish
+    secret  : bobrobys
+
+
+  tasks:
+    - name: Print secret
+      debug: 
+        var: secret 
+
+    - debug:
+        msg: "Abobys amogys {{secret}}"
+
+    - set_fact: full_message="{{message2}} {{message1}}"
+
+    - debug: 
+        var: full_message
+

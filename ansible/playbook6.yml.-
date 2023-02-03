@@ -1,0 +1,37 @@
+---
+- name   : Install Atop and Upload my Web Page
+  hosts  : test33   
+  any_errors_fatal: true
+  become : yes
+
+  vars:
+    source_folder: /home/barbara/test/test2
+    destin_folder: /home/barbara
+    destin_folderww: /var/www
+
+  tasks:
+    - name: ping test
+      ping: 
+
+    - name: copy files
+      include: copy_files.yml
+ 
+    - name: unregister server Load Balancer
+      shell: /bin/bash /opt/testd/lb.sh {{ inventory_hostname }} 
+      delegate_to: 127.0.0.1
+
+      notify:
+        - restart atop
+
+    - name: aa
+      service:
+        name: atop
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: restart atop
+      service:
+        name: atop
+        state: restarted
+

@@ -1,0 +1,15 @@
+---
+- name   : ansible errors
+  hosts  : test33
+  become : yes
+
+  tasks:
+  - name: number1
+    apt: "name=wekfmelfkem pkg=aoaoa state=installed"
+
+  - name: number2
+    shell: "echo bababoo"
+
+
+  - name: number3
+    shell: "echo privet"
