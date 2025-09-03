@@ -17,7 +17,7 @@
       "associate_public_ip_address": true,
       "user_data_file": "./user-data.yaml",
       "communicator": "ssh",
-      "winrm_username": "ubuntu",
+      "ssh_username": "ubuntu"
       "source_ami_filter": {
         "filters": {
           "virtualization-type": "hvm",
