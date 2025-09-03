@@ -8,16 +8,12 @@
 
 echo ${AWSENVIRON}
 
-# Создаем пользователя
+# Создаем пользователя + группу
 ls_user="deployer"
 useradd --shell /bin/bash --home /home/${ls_user} --create-home ${ls_user} --comment "${ls_user}"
-useradd -m -s /bin/bash ${ls_user}
-
-# Добавляем в группы
-usermod -aG ${ls_user}
 
 # Настраиваем права
-echo '${ls_user} ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/${ls_user}
+echo "${ls_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${ls_user}
 
 # Добавляем SSH ключи
 mkdir -p /home/${ls_user}/.ssh
