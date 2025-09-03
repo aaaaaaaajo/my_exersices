@@ -1,5 +1,5 @@
 #!/bin/sh
-### File            : init-script.sh 
+### File            : init-script.sh
 ### Description     : Configuring sources before upgrade ${ENVIRON}
 ### Author          : Varvara Yasko
 ### Version history :
