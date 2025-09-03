@@ -54,4 +54,7 @@ echo "<tilte>healtcheck</tilte>" > /var/www/nginx/healthcheck.html
 # Перезапускаем nginx
 systemctl restart nginx
 
+curl -v http://127.0.0.1:80/healthcheck.html
+curl -v http://127.0.0.1:80/index.html
+
 #EOF
