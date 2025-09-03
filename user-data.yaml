@@ -15,14 +15,15 @@ packages:
  - jq
  - nginx
  - net-tools
-        
+
 users:
- - name: ubuntu
+ - name: deployer
    groups: sudo
    shell: /bin/bash
    sudo: ['ALL=(ALL) NOPASSWD:ALL']
    ssh-authorized-keys:
     - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOLK8IEAqChX4vnPjyCOVN4g7WmirWZZG9V3Nk8ZzIHN yasko
+    - ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJeieBg44JxRIv8hsd0YA/qxsoLszGZ7U2pn86obcfUrxajDd3J9gFlEr8IzS9Q06zZSSAiigo8XlgVzsG7BfUs= laptop-myasko
 runcmd:
  - rm /etc/nginx/sites-enabled/default
  - echo " server {
