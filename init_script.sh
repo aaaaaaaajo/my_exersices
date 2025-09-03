@@ -8,16 +8,13 @@
 
 echo ${AWSENVIRON}
 
-sudo apt update
-sudo apt install -y curl wget mc bzip2 jq nginx net-tools
-
 # Создаем пользователя
 useradd -m -s /bin/bash deployer
 
 # Добавляем в группы
-usermod -aG sudo deployer
+usermod -aG deployer
 
-# Настраиваем sudo права
+# Настраиваем права
 echo 'deployer ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/deployer
 
 # Добавляем SSH ключи
@@ -31,6 +28,11 @@ ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBC4qizdD
 chown -R deployer:deployer /home/deployer/.ssh
 chmod 700 /home/deployer/.ssh
 chmod 600 /home/deployer/.ssh/authorized_keys
+
+###########
+apt update
+apt install -y curl wget mc bzip2 jq nginx net-tools
+###########
 
 # Выполняем команды
 rm -f /etc/nginx/sites-enabled/default

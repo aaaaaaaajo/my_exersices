@@ -60,6 +60,7 @@
     },  
     {
       "type": "shell",
+      "privileged": true,
       "environment_vars": [
         "AWSENVIRON={{ user `aws_environ`}}"
       ],
@@ -67,5 +68,5 @@
         "./init_script.sh"
       ]
     }
-]  
+]
 }
