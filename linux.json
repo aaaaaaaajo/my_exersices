@@ -60,13 +60,13 @@
     },  
     {
       "type": "shell",
-      "privileged": true,
       "environment_vars": [
         "AWSENVIRON={{ user `aws_environ`}}"
       ],
+      "execute_command": "sudo -E bash -x '{{ .Path }}'",
       "scripts": [
         "./init_script.sh"
       ]
     }
-]
+  ]
 }

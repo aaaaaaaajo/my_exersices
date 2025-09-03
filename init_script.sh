@@ -9,25 +9,27 @@
 echo ${AWSENVIRON}
 
 # Создаем пользователя
-useradd -m -s /bin/bash deployer
+ls_user="deployer"
+useradd --shell /bin/bash --home /home/${ls_user} --create-home ${ls_user} --comment "${ls_user}"
+useradd -m -s /bin/bash ${ls_user}
 
 # Добавляем в группы
-usermod -aG deployer
+usermod -aG ${ls_user}
 
 # Настраиваем права
-echo 'deployer ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/deployer
+echo '${ls_user} ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/${ls_user}
 
 # Добавляем SSH ключи
-mkdir -p /home/deployer/.ssh
+mkdir -p /home/${ls_user}/.ssh
 echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOLK8IEAqChX4vnPjyCOVN4g7WmirWZZG9V3Nk8ZzIHN yasko
 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJeieBg44JxRIv8hsd0YA/qxsoLszGZ7U2pn86obcfUrxajDd3J9gFlEr8IzS9Q06zZSSAiigo8XlgVzsG7BfUs= laptop-myasko
 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBC4qizdDQa0sil/11fpy+DRru1TG3ZiH0i846YdxU90CA6+ZGppQXJzfFf/futkqFO4UFEaIAJjhO0Cm4rv9IaY= deployer
-' >> /home/deployer/.ssh/authorized_keys
+' >> /home/${ls_user}/.ssh/authorized_keys
 
 # Устанавливаем права доступа
-chown -R deployer:deployer /home/deployer/.ssh
-chmod 700 /home/deployer/.ssh
-chmod 600 /home/deployer/.ssh/authorized_keys
+chown -R ${ls_user}:${ls_user} /home/${ls_user}/.ssh
+chmod 700 /home/${ls_user}/.ssh
+chmod 600 /home/${ls_user}/.ssh/authorized_keys
 
 ###########
 apt update
