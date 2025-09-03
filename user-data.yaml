@@ -1,0 +1,43 @@
+#cloud-config
+### File            : user-data.yaml 
+### Description     : Configuring sources before upgrade ${ENVIRON}
+### Author          : Varvara Yasko
+### Version history :
+### 20250903 1.0 Create basic idea for packer.
+hostname: aws-test-00
+package_update: true
+package_upgrade: false
+packages:
+ - curl
+ - wget
+ - mc
+ - bzip2
+ - jq
+ - nginx
+ - net-tools
+        
+users:
+ - name: ubuntu
+   groups: sudo
+   shell: /bin/bash
+   sudo: ['ALL=(ALL) NOPASSWD:ALL']
+   ssh-authorized-keys:
+    - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOLK8IEAqChX4vnPjyCOVN4g7WmirWZZG9V3Nk8ZzIHN yasko
+runcmd:
+ - rm /etc/nginx/sites-enabled/default
+ - echo " server {
+    listen 80;
+
+    root /var/www/nginx;
+    index index.html index.htm;
+
+    access_log /var/log/nginx/test-00-access.log;
+    error_log /var/log/nginx/test-00-error.log;
+  }
+  " > /etc/nginx/sites-enabled/my-nginx
+ - mkdir -p /var/www/nginx/
+ - echo "<h1>the machine test-00</h1>" > /var/www/nginx/index.html
+ - echo "<tilte>healtcheck</tilte>" > /var/www/nginx/healthcheck.html
+power_state:
+   mode: reboot
+#EOF

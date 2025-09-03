@@ -1,0 +1,74 @@
+{
+  "variables": {
+    "aws_access_key"  : "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_key"  : "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "aws_region"      : "{{env `AWS_ENV_REGION`}}",
+    "aws_ami_tag_name": "{{env `AWS_AMI_TAG_NAME`}}",
+    "aws_environ"     : "{{env `ENVIRON`}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "ami_name": "{{user `aws_ami_tag_name`}}",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "{{user `aws_region`}}",
+      "instance_type": "t3.large",
+      "associate_public_ip_address": true,
+      "user_data_file": "./user-data.yaml",
+      "communicator": "ssh",
+      "winrm_username": "ubuntu",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "name": "???Linux-test-server-*",
+          "root-device-type": "ebs"
+        },
+        "owners": [ "???801119661308" ],
+        "most_recent": true
+      },
+      "vpc_filter": {
+        "filters": {
+          "tag:Class": "build",
+          "isDefault": "false"
+        }
+      },
+      "subnet_filter": {
+        "filters": {
+          "tag:Class": "build"
+        },
+        "most_free": true,
+        "random": false
+      },
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "encrypted": false,
+          "delete_on_termination": true,
+          "volume_type": "gp3",
+          "iops": 3000,
+          "throughput": 750,
+          "volume_size": 32
+        }
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "echo 'AMI build host: $(hostname) - $(date)'",
+        "cloud-init status || true"
+      ]
+    },  
+    {
+      "type": "shell",
+      "environment_vars": [
+        "AWSENVIRON={{ user `aws_environ`}}"
+      ],
+      "scripts": [
+        "./init_script.sh"
+      ]
+    }
+]  
+}
